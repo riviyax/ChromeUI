@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ChromeUI</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;padding:12px;width:300px}
+    button{padding:8px;border-radius:8px;border:0;background:#0b74ff;color:#fff;cursor:pointer}
+    .link{display:block;margin:6px 0}
+  </style>
+</head>
+<body>
+  <h3>ChromeUI</h3>
+  <p><button id="open-options">Open Customize</button></p>
+  <div id="links"></div>
+  <script>
+    document.getElementById('open-options').addEventListener('click', ()=> {
+      // open the extension options page
+      if (chrome.runtime.openOptionsPage) chrome.runtime.openOptionsPage();
+      else window.open(chrome.runtime.getURL('options.html'));
+    });
+
+    // render quick links stored
+    chrome.storage.sync.get(['chromeui_settings'], data=>{
+      const settings = (data && data.chromeui_settings) || {};
+      const quick = settings.quickLinks || [{title:'Gmail',url:'https://mail.google.com'},{title:'YouTube',url:'https://www.youtube.com'}];
+      const container = document.getElementById('links');
+      quick.forEach(q=>{
+        const a = document.createElement('a');
+        a.href = q.url; a.textContent = q.title; a.className='link';
+        a.target = '_blank';
+        container.appendChild(a);
+      });
+    });
+  </script>
+</body>
+</html>

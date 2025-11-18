@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>ChromeUI Options</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+<main style="padding:24px;max-width:900px;margin:0 auto;">
+<h1>ChromeUI Options</h1>
+<p>Preview and reset settings</p>
+<button id="reset">Reset to defaults</button>
+<script>
+document.getElementById('reset').addEventListener('click', ()=>{
+  const defaults = { overlay:0.45, quickLinks:[{title:'Gmail',url:'https://mail.google.com'},{title:'YouTube',url:'https://www.youtube.com'},{title:'GitHub',url:'https://github.com'}], uploads:[], current: null };
+  chrome.storage.sync.set({chromeui_settings: defaults}, ()=> alert('Reset done. Open a new tab to see changes.'));
+});
+</script>
+</main>
+</body>
+</html>

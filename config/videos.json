@@ -1,0 +1,12 @@
+[
+  {
+    "id": "default-video-1",
+    "name": "Studtying Girl",
+    "path": "assets/videos/default1.mp4"
+  },
+  {
+    "id": "default-video-2",
+    "name": "Red Moon",
+    "path": "assets/videos/default2.mp4"
+  }
+]

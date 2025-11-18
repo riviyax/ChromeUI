@@ -1,0 +1,12 @@
+[
+  {
+    "id": "default-image-1",
+    "name": "Girl Wallking on the street",
+    "path": "assets/images/default1.jpg"
+  },
+  {
+    "id": "default-image-2",
+    "name": "Demon Slayer",
+    "path": "assets/images/default2.jpg"
+  }
+]

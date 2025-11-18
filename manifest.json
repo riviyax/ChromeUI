@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "ChromeUI \u2014 Custom Chrome Tab",
+  "version": "1.1",
+  "description": "Stylish dashboard new tab with background videos/images, clock, greeting, and easy customization.",
+  "permissions": ["storage"],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "16": "icons/icon16.svg",
+    "48": "icons/icon48.svg",
+    "128": "icons/icon128.svg"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ChromeUI"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/music/*",
+        "assets/images/*",
+        "assets/videos/*",
+        "config/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

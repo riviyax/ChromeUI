@@ -1,0 +1,4 @@
+[
+  { "id": "music-chill1", "name": "Chill Loop", "path": "assets/music/music1.mp3" },
+  { "id": "music-ambient1", "name": "Ambient Pad", "path": "assets/music/music2.mp3" }
+]
