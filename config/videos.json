@@ -8,5 +8,15 @@
     "id": "default-video-2",
     "name": "Red Moon",
     "path": "assets/videos/default2.mp4"
+  },
+  {
+    "id": "default-video-3",
+    "name": "Space Walk",
+    "path": "assets/videos/default3.mp4"
+  },
+  {
+    "id": "default-video-4",
+    "name": "City Timelapse",
+    "path": "assets/videos/default4.mp4"
   }
 ]

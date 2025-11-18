@@ -1,4 +1,33 @@
 [
-  { "id": "music-chill1", "name": "Chill Loop", "path": "assets/music/music1.mp3" },
-  { "id": "music-ambient1", "name": "Ambient Pad", "path": "assets/music/music2.mp3" }
+  {
+    "id": "music-classical1",
+    "name": "Lofi - Good Night",
+    "path": "assets/music/music5.mp3"
+  },
+    {
+    "id": "music-classical1",
+    "name": "Lofi Study Beats",
+    "path": "assets/music/music6.mp3"
+  },
+
+  {
+    "id": "music-chill1",
+    "name": "Chill Loop",
+    "path": "assets/music/music1.mp3"
+  },
+  {
+    "id": "music-ambient1",
+    "name": "Ambient Pad",
+    "path": "assets/music/music2.mp3"
+  },
+  {
+    "id": "music-lofi1",
+    "name": "Innovation background music",
+    "path": "assets/music/music3.mp3"
+  },
+  {
+    "id": "music-upbeat1",
+    "name": "Upbeat Tune",
+    "path": "assets/music/music4.mp3"
+  }
 ]

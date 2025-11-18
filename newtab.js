@@ -603,8 +603,9 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 
 const playlists = [
     "https://open.spotify.com/embed/playlist/37i9dQZF1DWYfNJLV7OBMA?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator",
-    "https://open.spotify.com/embed/playlist/37i9dQZF1DX0XUsuxWHRQd?utm_source=generator"
+    "https://open.spotify.com/embed/playlist/372vscw9O87WnUqQtt9jL9?utm_source=generator",
+    "https://open.spotify.com/embed/playlist/75UpUntyozjrqR03Xza9MG?utm_source=generator",
+    "https://open.spotify.com/embed/playlist/4kOdiP5gbzocwxQ8s2UTOF?utm_source=generator",
   ];
 
   let currentIndex = 0;

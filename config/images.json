@@ -8,5 +8,20 @@
     "id": "default-image-2",
     "name": "Demon Slayer",
     "path": "assets/images/default2.jpg"
+  },
+  {
+    "id": "default-image-3",
+    "name": "Staricase view",
+    "path": "assets/images/default3.jpg"
+  },
+  {
+    "id": "default-image-4",
+    "name": "Wild mountains view",
+    "path": "assets/images/default4.jpg"
+  },
+  {
+    "id": "default-image-5",
+    "name": "City Skyline",
+    "path": "assets/images/default5.jpg"
   }
 ]

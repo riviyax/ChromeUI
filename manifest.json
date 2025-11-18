@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ChromeUI \u2014 Custom Chrome Tab",
   "version": "1.0",
-  "description": "Stylish dashboard new tab with background videos/images, clock, greeting, and easy customization.",
+  "description": "Stylish dashboard new tab with background videos/images, clock, greeting, and easy customization. - Made with ♥ by Riviya_X",
   "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "newtab.html"
