@@ -6,12 +6,22 @@
   --radius: 14px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   --panel-w: 360px;
-  /* Custom property for overlay darkness, controlled by JS */
-  --overlay-darkness: 0.45; 
+  --overlay-darkness: 0.45;
 }
+
+@font-face {
+  font-family: 'GoboldBold';
+  src: url('./assets/fonts/GoboldBold.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   height: 100%;
@@ -19,8 +29,6 @@ body {
   font-family: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
   color: var(--accent);
   background: var(--bg);
-  /* Ensure no scrollbars */
-  margin-bottom: 0 !important;
   overflow: hidden !important;
 }
 
@@ -41,19 +49,15 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  /* Transition for background fade */
   opacity: 0;
   transition: opacity 0.8s ease;
   will-change: opacity;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* ensure stacking order: image above video when visible so image covers video */
 #bg-video { z-index: -2; }
 #bg-image { z-index: -1; }
 
-/* visible class controls when element is shown (fade-in) */
 #bg-video.visible,
 #bg-image.visible {
   opacity: 1;
@@ -63,23 +67,24 @@ body {
 #overlay {
   position: fixed;
   inset: 0;
-  /* Use the custom property for darkness */
-  background: rgba(6, 10, 20, var(--overlay-darkness)); 
+  background: rgba(6, 10, 20, var(--overlay-darkness));
   z-index: -1;
   transition: background 0.3s ease;
 }
 
-/* Top Bar and Controls */
+/* Top Bar */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 36px;
 }
+
 .brand {
   font-weight: 700;
   letter-spacing: 1px;
 }
+
 .btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -89,6 +94,7 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -101,36 +107,41 @@ body {
   align-items: flex-start;
   height: calc(100% - 110px);
 }
+
 .left-panel {
   flex: 1;
   max-width: 800px;
 }
+
 .right-panel {
   width: var(--panel-w);
 }
 
-/* Clock and Greeting */
+/* Clock + Greeting */
 .clock {
+  font-family: 'GoboldBold';
   font-size: 72px;
   font-weight: 600;
   margin-bottom: 6px;
 }
+
 .greeting {
   font-size: 20px;
+  font-family: Poppins, sans-serif;
   color: var(--muted);
   margin-bottom: 18px;
 }
 
 /* Search Card */
 .search-card {
-  /* Use a slightly darker glass for better contrast */
-  background: rgba(255, 255, 255, 0.08); 
+  background: rgba(255, 255, 255, 0.08);
   padding: 18px;
   border-radius: 12px;
   box-shadow: var(--shadow);
   margin-bottom: 16px;
   max-width: 760px;
 }
+
 .search-card input {
   width: 100%;
   border: 0;
@@ -138,46 +149,68 @@ body {
   color: var(--accent);
   font-size: 18px;
   outline: none;
-  /* Improve placeholder visibility */
-  &::placeholder {
-    color: var(--muted);
-    opacity: 0.8;
-  }
+}
+
+.search-card input::placeholder {
+  color: var(--muted);
+  opacity: 0.8;
 }
 
 /* Quick Links */
 .quick-links {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: 20px;
 }
+
 .link {
   background: rgba(255, 255, 255, 0.04);
-  padding: 10px 14px;
+  padding: 10px 10px 5px 10px;
   border-radius: 10px;
-  min-width: 120px;
+  min-width: 100px;
   text-align: center;
   color: var(--accent);
   text-decoration: none;
   transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .link:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Right Panel Cards */
+.link-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 6px;
+  object-fit: contain; 
+}
+
+.link-label {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+/* Right Panel Controls */
 .controls-card {
   background: var(--glass);
   padding: 16px;
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
+
 .controls-row {
   display: flex;
   gap: 8px;
   margin-bottom: 12px;
 }
+
 .control {
   flex: 1;
   padding: 8px;
@@ -188,14 +221,17 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .control:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
 .label {
   font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
 }
+
 .muted {
   color: var(--muted);
   font-size: 14px;
@@ -208,13 +244,14 @@ body {
   border-radius: 12px;
   margin-top: 20px;
 }
+
 .spotify-card .label {
   color: #fff;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-/* Music Control Box (Bottom Left) */
+/* Music Control */
 .music-control {
   position: fixed;
   bottom: 20px;
@@ -227,6 +264,7 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow);
 }
+
 #quick-url, #quick-title {
   border-radius:5px;
   outline: none;
@@ -234,52 +272,42 @@ body {
   border: none;
   color: white;
 }
+
 .music-control .control {
   background: rgba(255, 255, 255, 0.04);
   border: none;
   width: 40px;
   height: 40px;
   font-size: 1.2rem;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .music-control button {
   margin: 0 4px;
-  display: inline;
 }
 
-/* Dialog and Backdrop Blur */
-
-/* 1. Add Blur to the backdrop */
+/* Dialog + Blur */
 dialog::backdrop {
-  /* Dim the background slightly */
-  background-color: rgba(0, 0, 0, 0.6); 
-  /* Apply the blur effect */
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
-/* 2. Style the dialog for better contrast */
 .dialog {
-  border-radius: 14px; /* Use root radius */
-  padding: 30px; /* Increased padding */
-  /* Semi-opaque, dark background for readability */
-  background: rgba(30, 30, 30, 0.95); 
+  border-radius: 14px;
+  padding: 30px;
+  background: rgba(30, 30, 30, 0.95);
   color: var(--accent);
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Glass border */
-  box-shadow: var(--shadow); /* Reuse global shadow */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow);
   min-width: 400px;
   max-width: 90vw;
-  /* Optional: Apply a tiny inner blur for subtle glass effect */
   backdrop-filter: blur(2px);
 }
-.dialog h3, .dialog h4 {
-  margin-top: 0;
-  font-weight: 600;
-}
-.dialog input[type="text"], .dialog input[type="number"], .dialog select {
+
+.dialog input,
+.dialog select {
   padding: 8px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -287,75 +315,61 @@ dialog::backdrop {
   color: var(--accent);
   outline: none;
 }
-.dialog input[type="file"] {
-  padding: 8px 0;
-}
-.dialog label {
-  font-weight: 500;
-}
 
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 900px) {
   .topbar {
     padding: 12px 20px;
   }
+  
   .dashboard {
     flex-direction: column;
     padding: 20px;
     gap: 20px;
   }
+
   .left-panel {
     max-width: 100%;
-    order: 2; /* Move the clock/search below controls on mobile */
+    order: 2;
   }
+
   .right-panel {
     width: 100%;
-    order: 1; /* Move controls/spotify to the top */
+    order: 1;
   }
+
   .clock {
     font-size: 48px;
   }
-  .greeting {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-  .search-card {
-    max-width: 100%;
-  }
+
   .music-control {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     flex-direction: row;
-    padding: 8px 12px;
   }
+
   #music-title {
     display: none;
   }
+
   .dialog {
-    min-width: auto;
     width: 95%;
+    min-width: auto;
   }
 }
 
 /* Chrome Extension UI Cleanup */
 #customize-button,
 cr-most-visited,
-cr-most-visited *, 
-ntp-logo, 
+cr-most-visited *,
+ntp-logo,
 .ntp-bottom-right,
 .ntp-desktop-customize {
   display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  width: 0 !important;
-  pointer-events: none !important;
 }
 
-.footerText{
-  /* text-align: center; */
+.footerText {
   font-size: 12px;
   color: var(--muted);
   margin-top: 10px;
