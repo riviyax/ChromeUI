@@ -9,14 +9,14 @@
   --overlay-darkness: 0.45;
 }
 
+/* Correct Custom Font */
 @font-face {
   font-family: 'GoboldBold';
   src: url('./assets/fonts/GoboldBold.woff2') format('woff2');
-  font-weight: normal;
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
-
 
 * {
   box-sizing: border-box;
@@ -32,7 +32,7 @@ body {
   overflow: hidden !important;
 }
 
-/* Background Container and Media */
+/* Background Container */
 #bg-container {
   position: fixed;
   inset: 0;
@@ -63,7 +63,7 @@ body {
   opacity: 1;
 }
 
-/* Background Overlay */
+/* Overlay */
 #overlay {
   position: fixed;
   inset: 0;
@@ -99,7 +99,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Dashboard Layout */
+/* Dashboard */
 .dashboard {
   display: flex;
   gap: 36px;
@@ -117,11 +117,10 @@ body {
   width: var(--panel-w);
 }
 
-/* Clock + Greeting */
+/* Clock */
 .clock {
   font-family: 'GoboldBold';
   font-size: 72px;
-  font-weight: 600;
   margin-bottom: 6px;
 }
 
@@ -132,7 +131,7 @@ body {
   margin-bottom: 18px;
 }
 
-/* Search Card */
+/* Search Box */
 .search-card {
   background: rgba(255, 255, 255, 0.08);
   padding: 18px;
@@ -186,15 +185,14 @@ body {
   width: 36px;
   height: 36px;
   margin-bottom: 6px;
-  object-fit: contain; 
+  object-fit: contain;
 }
 
 .link-label {
   font-size: 14px;
-  white-space: nowrap;
+  max-width: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 80px;
 }
 
 /* Right Panel Controls */
@@ -232,12 +230,7 @@ body {
   margin-top: 8px;
 }
 
-.muted {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* Spotify Player */
+/* Spotify Card */
 .spotify-card {
   background: rgba(0,0,0,0.6);
   padding: 10px;
@@ -251,7 +244,7 @@ body {
   margin-bottom: 5px;
 }
 
-/* Music Control */
+/* Music Controls */
 .music-control {
   position: fixed;
   bottom: 20px;
@@ -265,8 +258,9 @@ body {
   box-shadow: var(--shadow);
 }
 
-#quick-url, #quick-title {
-  border-radius:5px;
+#quick-url,
+#quick-title {
+  border-radius: 5px;
   outline: none;
   background-color: #141D2D;
   border: none;
@@ -288,7 +282,7 @@ body {
   margin: 0 4px;
 }
 
-/* Dialog + Blur */
+/* Dialog */
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
@@ -310,10 +304,96 @@ dialog::backdrop {
 .dialog select {
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.3);
   color: var(--accent);
   outline: none;
+}
+
+/* To-Do Card */
+.todo-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+  max-width: 760px;
+}
+
+.todo-card h3 {
+  margin: 0 0 15px 0;
+}
+
+.todo-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+#todo-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.todo-add-btn {
+  padding: 10px 15px;
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: opacity 0.3s;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item-text {
+  flex: 1;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.todo-item.completed .todo-item-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.delete-todo-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.delete-todo-btn:hover {
+  color: #ff6b6b;
+}
+
+#todo-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#todo-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 4px;
 }
 
 /* Responsive */
@@ -321,7 +401,7 @@ dialog::backdrop {
   .topbar {
     padding: 12px 20px;
   }
-  
+
   .dashboard {
     flex-direction: column;
     padding: 20px;
@@ -357,9 +437,13 @@ dialog::backdrop {
     width: 95%;
     min-width: auto;
   }
+
+  .todo-card {
+    max-width: 100%;
+  }
 }
 
-/* Chrome Extension UI Cleanup */
+/* Chrome NTP Cleanup */
 #customize-button,
 cr-most-visited,
 cr-most-visited *,

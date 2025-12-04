@@ -132,7 +132,7 @@ function renderQuickLinks(links) {
   (links || []).forEach((l) => {
     const a = document.createElement("a");
     a.href = l.url;
-    a.target = "_blank";
+    a.target = "";
     a.rel = "noopener noreferrer";
     a.className = "link";
 
