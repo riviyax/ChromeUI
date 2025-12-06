@@ -492,12 +492,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   /* --- Keyboard Shortcuts --- */
-  document.addEventListener("keydown", (e) => {
-    const nextBtn = document.getElementById("next-bg");
-    const prevBtn = document.getElementById("prev-bg");
-    if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
-    if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
-  });
+  // document.addEventListener("keydown", (e) => {
+  //   const nextBtn = document.getElementById("next-bg");
+  //   const prevBtn = document.getElementById("prev-bg");
+  //   if (e.key === "ArrowRight" && nextBtn) nextBtn.click();
+  //   if (e.key === "ArrowLeft" && prevBtn) prevBtn.click();
+  // });
 
   /* --- Music Controls Wiring --- */
   if (musicPlayBtn) musicPlayBtn.addEventListener("click", togglePlayPause);
