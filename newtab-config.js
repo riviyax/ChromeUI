@@ -1,5 +1,5 @@
 /* --- newtab-config.js --- */
-import { state, applyBackground } from './newtab-core.js';
+import { state } from './newtab-core.js';
 
 /* ---------- Storage helpers ---------- */
 export function saveSettings(settings) {
@@ -56,6 +56,7 @@ export function buildList(configs, saved) {
   );
   if (saved && saved.uploads && Array.isArray(saved.uploads)) {
     // uploaded backgrounds (images/videos)
+    // CRITICAL: Ensure uploaded items are added to the list for the save handler to find them.
     saved.uploads.forEach((u) => {
       if (!u.id) u.id = "upload-" + Date.now();
       list.unshift(u);

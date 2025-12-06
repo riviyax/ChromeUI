@@ -206,12 +206,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // load packaged configs and saved settings
-  configs = await fetchConfigs(); // Save to global scope for use in saveBtn
+  configs = await fetchConfigs(); 
   const saved = (await loadSettings()) || {};
   const list = buildList(configs, saved);
   state.list = list;
 
   /* --- Populate Settings Dropdowns --- */
+  
+  // 1. Populate with packaged images
   if (configs.images && imgSelect) {
     configs.images.forEach((i) => {
       const opt = document.createElement("option");
@@ -220,6 +222,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       imgSelect.appendChild(opt);
     });
   }
+  
+  // 2. Populate with packaged videos
   if (configs.videos && vidSelect) {
     configs.videos.forEach((v) => {
       const opt = document.createElement("option");
@@ -228,6 +232,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       vidSelect.appendChild(opt);
     });
   }
+  
+  // 3. Populate with **USER UPLOADS** (Ensures uploads appear in dropdown on load)
+  if (saved.uploads && Array.isArray(saved.uploads)) {
+    saved.uploads.forEach((item) => {
+      const opt = document.createElement("option");
+      opt.value = item.id;
+      opt.textContent = `[Upload] ${item.name}`; 
+      
+      if (item.type === "image" && imgSelect) {
+        imgSelect.appendChild(opt);
+      } else if (item.type === "video" && vidSelect) {
+        vidSelect.appendChild(opt);
+      }
+    });
+  }
+
+  // 4. Populate music select
   if (configs.music && musicSelect) {
     (configs.music || []).forEach((m) => {
       const opt = document.createElement("option");
@@ -251,6 +272,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderQuickLinks(state.quickLinks);
 
   /* --- Initial Background/Overlay/Slideshow Setup --- */
+  let currentBgId = null;
+
   if (saved && saved.current) {
     // Logic to ensure saved.current matches an item in state.list if it's a default one
     if (saved.current.id && saved.current.id.startsWith("default-")) {
@@ -263,12 +286,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     applyBackground(saved.current);
     if (saved.current && saved.current.id) {
+      currentBgId = saved.current.id;
       const idx = state.list.findIndex((x) => x.id === saved.current.id);
       if (idx !== -1) state.index = idx;
     }
   } else if (list.length > 0) {
     state.index = 0;
     applyBackground(list[0]);
+    currentBgId = list[0].id;
+  }
+  
+  // Select the current background in the dropdown
+  if (currentBgId) {
+      const currentBg = state.list.find(x => x.id === currentBgId);
+      if (currentBg) {
+          if (currentBg.type === 'image' && imgSelect) {
+              imgSelect.value = currentBgId;
+          } else if (currentBg.type === 'video' && vidSelect) {
+              vidSelect.value = currentBgId;
+          }
+      }
   }
 
   // overlay control
@@ -335,12 +372,28 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!s) s = {};
           s.uploads = s.uploads || [];
           s.uploads.unshift(item); // Prepend to saved uploads
-          s.current = item;
+          s.current = item; // CRITICAL: Immediately set as current
           s.overlay = parseFloat(overlayRange ? overlayRange.value : 0.45);
           saveSettings(s);
           state.list.unshift(item); // Prepend to in-memory list
           state.index = 0;
           applyBackground(item);
+          
+          // Update dropdown immediately after upload
+          const opt = document.createElement("option");
+          opt.value = item.id;
+          opt.textContent = `[Upload] ${item.name}`; 
+          
+          if (item.type === 'image' && imgSelect) {
+              imgSelect.prepend(opt);
+              imgSelect.value = item.id;
+              if (vidSelect) vidSelect.value = ''; // Clear video selection
+          } else if (item.type === 'video' && vidSelect) {
+              vidSelect.prepend(opt);
+              vidSelect.value = item.id;
+              if (imgSelect) imgSelect.value = ''; // Clear image selection
+          }
+          
           settingsDialog && settingsDialog.close();
         });
       };
@@ -372,7 +425,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  /* --- Save Button Handler --- */
+  /* --- Save Button Handler (FIXED to save uploaded files permanently) --- */
   if (saveBtn) {
     saveBtn.addEventListener("click", (ev) => {
       ev.preventDefault();
@@ -393,32 +446,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
         s.quickLinks = state.quickLinks;
 
-        if (configs) {
-          // Update current background setting
-          if (selVid && configs.videos) {
-            const conf = configs.videos.find((v) => v.id === selVid);
-            if (conf)
-              s.current = {
-                type: "video",
-                src: chrome.runtime.getURL(conf.path),
-                name: conf.name,
-                id: conf.id,
-                overlay: overlayVal,
-              };
-          } else if (selImg && configs.images) {
-            const conf = configs.images.find((i) => i.id === selImg);
-            if (conf)
-              s.current = {
-                type: "image",
-                src: chrome.runtime.getURL(conf.path),
-                name: conf.name,
-                id: conf.id,
-                overlay: overlayVal,
-              };
-          } else {
-            if (s.current) s.current.overlay = overlayVal;
-          }
+        // 1. DETERMINE WHICH BACKGROUND WAS SELECTED
+        let currentBgId = selVid || selImg;
+        let currentBg = null;
 
+        if (currentBgId) {
+          // **FIX IMPLEMENTED HERE**: Find the full object (including data URL for uploads)
+          // in state.list using the selected ID.
+          currentBg = state.list.find((item) => item.id === currentBgId);
+        }
+
+        if (currentBg) {
+          // 2. SAVE THE FULL OBJECT (CRITICAL FOR UPLOADS)
+          s.current = {
+            ...currentBg,
+            overlay: overlayVal, 
+          };
+        } else {
+          // Fallback if current is an upload that was removed, or if using color
+          if (s.current) s.current.overlay = overlayVal;
+        }
+
+        if (configs) {
           // Set music index if user selected a packaged track
           if (selMusic) {
             const mi = (configs.music || []).findIndex(
@@ -432,7 +481,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               s.musicIndex = state.music.index;
             }
           }
-        } // end if (configs)
+        }
 
         saveSettings(s);
 
@@ -505,7 +554,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (musicPrevBtn) musicPrevBtn.addEventListener("click", prevMusic);
 
   // Autoplay music check — updateMusicUI should be called again after wiring
-  // to ensure correct state if a track was previously playing.
   if (saved && saved.musicIndex !== undefined) {
     state.music.index = saved.musicIndex;
   }
