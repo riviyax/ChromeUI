@@ -318,6 +318,7 @@ dialog::backdrop {
   box-shadow: var(--shadow);
   margin-top: 20px;
   max-width: 760px;
+  float: right;
 }
 
 .todo-card h3 {
