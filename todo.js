@@ -115,3 +115,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial render when the page loads
     renderTasks();
 });
+
+const panellockValue = localStorage.getItem("lock-toggle");
+const msg = document.getElementById("errmsg");
+
+// Check if the stored value is the string "true"
+if (panellockValue === "true") {
+  msg.innerText = "Please lock the panels to use the todo list.";
+} else {
+  // Clear the message if the lock is not set to "true" (e.g., it's "false", null, or undefined)
+  msg.innerText = "";
+}

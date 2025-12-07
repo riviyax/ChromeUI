@@ -91,3 +91,18 @@ export function loadPlaylist(configMusic, saved) {
   if (saved && typeof saved.musicIndex === "number")
     state.music.index = saved.musicIndex;
 }
+
+
+export function saveCardOrder(order) {
+    // Saves the array of card IDs (e.g., ['todo-card-module', 'bg-controls-card', 'spotify-player-card'])
+    chrome.storage.sync.set({ chromeui_card_order: order });
+}
+
+export function loadCardOrder() {
+    return new Promise((res) => {
+        chrome.storage.sync.get(["chromeui_card_order"], (data) => {
+            // Returns the saved array of IDs, or null if none exist
+            res(data.chromeui_card_order || null);
+        });
+    });
+}

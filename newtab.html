@@ -12,14 +12,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Background -->
     <div id="bg-container">
       <video id="bg-video" autoplay muted loop playsinline></video>
       <img id="bg-image" />
       <div id="overlay"></div>
     </div>
 
-    <!-- Topbar -->
     <header class="topbar">
       <div class="brand"></div>
       <div class="right-controls">
@@ -29,9 +27,7 @@
       </div>
     </header>
 
-    <!-- Main Dashboard -->
     <main class="dashboard">
-      <!-- Left Panel -->
       <div class="left-panel">
         <div class="clock" id="clock">--:--</div>
         <div class="greeting" id="greeting">Good day</div>
@@ -41,74 +37,73 @@
         </div>
 
         <div class="quick-links" id="quick-links"></div>
-
-        <!-- To-Do List -->
-        <div class="todo-card">
-          <h3>To-Do List</h3>
-          <div class="todo-input-group">
-            <input
-              type="text"
-              id="todo-input"
-              placeholder="Add a new task..."
-            />
-            <button id="add-todo-btn" class="btn todo-add-btn">Add</button>
-          </div>
-          <ul id="todo-list"></ul>
-        </div>
       </div>
 
-      <!-- Right Panel -->
       <div class="right-panel">
-        <!-- Background Controls -->
-        <div id="bg-controll" class="controls-card">
-          <div class="controls-row">
-            <button id="toggle-play" class="control">
-              <i class="bi bi-pause"></i>
-            </button>
-            <button id="prev-bg" class="control">
-              <i class="bi bi-arrow-left-short"></i>
-            </button>
-            <button id="next-bg" class="control">
-              <i class="bi bi-arrow-right-short"></i>
-            </button>
-          </div>
-          <div class="label">Background</div>
-          <div id="current-bg-name" class="muted">Default</div>
-        </div>
+        <div id="card-area"> 
 
-        <!-- Spotify Player -->
-        <div class="spotify-card">
-          <iframe
-            id="spotify-player"
-            style="border-radius: 12px"
-            src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYfNJLV7OBMA?utm_source=generator"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
-          <div
-            class="spotify-controls"
-            style="margin-top: 10px; text-align: center"
-          >
-            <button id="spotify-prev" class="control">
-              <i class="bi bi-arrow-left-short"></i>
-            </button>
-            <button id="spotify-next" class="control">
-              <i class="bi bi-arrow-right-short"></i>
-            </button>
+          <div id="bg-controls-card" class="controls-card" draggable="true">
+            <div class="controls-row">
+              <button id="toggle-play" class="control">
+                <i class="bi bi-pause"></i>
+              </button>
+              <button id="prev-bg" class="control">
+                <i class="bi bi-arrow-left-short"></i>
+              </button>
+              <button id="next-bg" class="control">
+                <i class="bi bi-arrow-right-short"></i>
+              </button>
+            </div>
+            <div class="label">Background</div>
+            <div id="current-bg-name" class="muted">Default</div>
           </div>
-        </div>
-      </div>
-    </main>
 
-    <!-- Settings Dialog -->
+          <div id="spotify-player-card" class="spotify-card" draggable="true">
+            <iframe
+              id="spotify-player"
+              style="border-radius: 12px"
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYfNJLV7OBMA?utm_source=generator"
+              width="100%"
+              height="352"
+              frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+            <div
+              class="spotify-controls"
+              style="margin-top: 10px; text-align: center"
+            >
+              <button id="spotify-prev" class="control">
+                <i class="bi bi-arrow-left-short"></i>
+              </button>
+              <button id="spotify-next" class="control">
+                <i class="bi bi-arrow-right-short"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="todo-card-module" class="todo-card" draggable="true">
+            <h3>To-Do List</h3>
+            <div class="todo-input-group">
+              <input
+                type="text"
+                id="todo-input"
+                placeholder="Add a new task..."
+              />
+              <button id="add-todo-btn" class="btn todo-add-btn">Add</button>
+            </div>
+            <p id="errmsg"></p>
+            <ul id="todo-list"></ul>
+          </div>
+          
+        </div> 
+        </div>
+      </main>
+
     <dialog id="settings" class="dialog">
       <form method="dialog" id="settings-form">
         <h3>Customize Background</h3>
 
-        <!-- Slideshow Settings -->
         <div class="field">
           <label>Slideshow</label>
           <div style="display: flex; gap: 12px; align-items: center">
@@ -130,9 +125,8 @@
 
         <hr />
 
-        <!-- Toggle Tabs -->
         <div class="field">
-          <label>Toggle Tabs</label>
+          <label>Toggle Pannels</label>
           <div style="display: flex; gap: 12px; align-items: center">
             <label style="display: flex; gap: 8px; align-items: center">
               <input id="bg-toggle" type="checkbox" /> Hide BG Player
@@ -146,10 +140,16 @@
             </label>
           </div>
         </div>
-
+<hr>
+<div class="field">
+          <div style="display: flex; gap: 12px; align-items: center">
+            <label style="display: flex; gap: 8px; align-items: center">Lock Pannels
+              <input id="lock-toggle" type="checkbox" /> 
+            </label>
+          </div>
+        </div>
         <hr />
 
-        <!-- Default Images/Videos -->
         <div class="field">
           <label>Choose default image</label>
           <select id="image-select">
@@ -171,7 +171,6 @@
 
         <hr />
 
-        <!-- Quick Links -->
         <h4>Quick links</h4>
         <div class="field">
           <label>Add / edit quick links (title + URL)</label>
@@ -201,7 +200,6 @@
           ></div>
         </div>
 
-        <!-- Music Settings -->
         <h4>Music</h4>
         <div class="field">
           <label>Choose packaged music</label>
@@ -215,7 +213,6 @@
           <input id="audio-input" type="file" accept="audio/*" />
         </div>
 
-        <!-- Overlay Darkness -->
         <div class="field">
           <label>Overlay darkness (0 - 1)</label>
           <input
@@ -236,7 +233,6 @@
       </form>
     </dialog>
 
-    <!-- Music Control -->
     <div
       id="music-control"
       class="music-control"

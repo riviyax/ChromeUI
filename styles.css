@@ -29,7 +29,7 @@ body {
   font-family: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
   color: var(--accent);
   background: var(--bg);
-  overflow: hidden !important;
+  overflow: auto;
 }
 
 /* Background Container */
@@ -99,13 +99,16 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
+::-webkit-scrollbar { display: none; }
+
 /* Dashboard */
 .dashboard {
   display: flex;
   gap: 36px;
   padding: 40px;
   align-items: flex-start;
-  height: calc(100% - 110px);
+  height: auto; /*calc(100% - 110px)*/
+  min-height: 100vh;
 }
 
 .left-panel {
@@ -115,7 +118,19 @@ body {
 
 .right-panel {
   width: var(--panel-w);
+  /* Added Display Flex to the right panel to ensure cards stack vertically. */
+  display: flex;
+  flex-direction: column; 
 }
+
+/* CRITICAL FIX: Ensure #card-area takes up the space inside right-panel
+   and allows its children (the draggable cards) to stack */
+#card-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between the draggable cards */
+}
+
 
 /* Clock */
 .clock {
@@ -195,12 +210,14 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Right Panel Controls */
+/* Right Panel Controls (Background) */
 .controls-card {
   background: var(--glass);
   padding: 16px;
   border-radius: 12px;
   box-shadow: var(--shadow);
+  /* Removed top margin, as spacing is handled by #card-area gap */
+  margin-top: 0; 
 }
 
 .controls-row {
@@ -235,7 +252,8 @@ body {
   background: rgba(0,0,0,0.6);
   padding: 10px;
   border-radius: 12px;
-  margin-top: 20px;
+  /* Removed top margin, as spacing is handled by #card-area gap */
+  margin-top: 0;
 }
 
 .spotify-card .label {
@@ -316,9 +334,11 @@ dialog::backdrop {
   padding: 18px;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  margin-top: 20px;
-  max-width: 760px;
-  float: right;
+  /* CRITICAL FIX: Removed float: right and max-width 
+     since it's now in the fixed-width right-panel */
+  margin-top: 0; 
+  float: none;
+  max-width: 100%;
 }
 
 .todo-card h3 {
@@ -419,6 +439,12 @@ dialog::backdrop {
     order: 1;
   }
 
+  /* CRITICAL FIX for mobile: Ensure cards still stack inside #card-area */
+  #card-area {
+    gap: 16px; 
+    /* The right-panel is now 100% width, so the cards fill it. */
+  }
+
   .clock {
     font-size: 48px;
   }
@@ -458,4 +484,29 @@ ntp-logo,
   font-size: 12px;
   color: var(--muted);
   margin-top: 10px;
+}
+
+/* --- Drag & Drop Styles --- */
+
+/* Ensures the cards are displayed properly for dropping */
+.todo-card, .controls-card, .spotify-card {
+    /* Ensure cards have consistent margins/padding and display settings */
+    transition: opacity 0.2s ease, border-top 0.2s ease, border-bottom 0.2s ease; 
+    cursor: grab;
+}
+
+/* Visual cue when hovering over the top half of the drop target */
+.drag-over-top {
+    border-top: 2px dashed #00bfff; /* Light blue dashed border */
+    padding-top: 8px; /* Give visual space for dropping before */
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* Visual cue when hovering over the bottom half of the drop target */
+.drag-over-bottom {
+    border-bottom: 2px dashed #00bfff; /* Light blue dashed border */
+    padding-bottom: 8px; /* Give visual space for dropping after */
+    margin-bottom: 8px;
+    margin-top: 0;
 }
