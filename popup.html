@@ -1,66 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ChromeUI</title>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: Poppins, sans-serif;
-      }
-      body {
-        font-family: Inter, system-ui, Arial;
-        padding: 12px;
-        background-color: white;
+        font-family: "Poppins", sans-serif;
       }
 
-      .home {
-        align-items: center;
-        min-height: 50vh;
-        background-position: center;
-        flex-direction: column;
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f7fa, #e4ebf5);
         display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
       }
-      button {
-        padding: 8px;
-        border-radius: 8px;
-        border: 0;
-        background: #0b74ff;
-        color: #fff;
-        cursor: pointer;
-        float: right;
+
+      .card {
+        background: #ffffff;
+        width: 300px;
+        max-width: 420px;
+        padding: 32px 28px;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        position: relative;
       }
-      .link {
-        display: block;
-        margin: 6px 0;
+
+      /* GitHub button */
+      .github {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+
+      .github a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: black;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .github a:hover {
+        transform: translateY(-0.5px);
+        box-shadow: 0 8px 20px rgb(155, 155, 155);
+      }
+
+      .github img {
+        width: 22px;
+        height: 22px;
+        filter: invert(1);
+      }
+
+      .logo {
+        width: 96px;
+        height: 96px;
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 14px;
+        color: #4b5563;
+        margin-bottom: 8px;
       }
 
       .footer {
-        margin-bottom: 20px;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      .footer a {
+        color: #0b74ff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
+
   <body>
-    <div class="github">
-      <button class="button">
-          <a target="_blank" href="https://github.com/riviyax">
-            <img
-              style="border-radius: 100px;"              
-              src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
-            ></img>
-          </a>
-        </button>
-    </div>
-    <div class="home">
-      <img src="icons/icon128.png" alt="Logo" />
+    <div class="card">
+      <div class="github">
+        <a
+          href="https://github.com/riviyax"
+          target="_blank"
+          aria-label="GitHub Profile"
+        >
+          <img
+            src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png"
+            alt="GitHub"
+          />
+        </a>
+      </div>
+
+      <img src="icons/icon128.png" alt="ChromeUI Logo" class="logo" />
+
       <h3>ChromeUI</h3>
-      <p>Thanks for using our extention!</p>
-      <br />
-      <p class="footer" style="margin-bottom: 20px;">
-        Made with ♥ by <a href="https://riviyax.pages.dev">Riviya_X</a>
+      <p>Thanks for using our extension!</p>
+
+      <p class="footer">
+        Made with ♥ by
+        <a href="https://riviyax.pages.dev" target="_blank">Riviya_X</a>
       </p>
     </div>
   </body>
