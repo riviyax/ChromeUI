@@ -38,7 +38,7 @@
         </a>
 
         <nav class="navbar__links" aria-label="Primary">
-          <a class="navbar__github" href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <a class="navbar__github" href="https://github.com/riviyax/foxui" target="_blank" rel="noopener noreferrer">
             GitHub <span aria-hidden="true">↗</span>
           </a>
         </nav>
@@ -60,11 +60,15 @@
           </p>
 
           <div class="cta-row">
-            <a href="#" class="btn btn--chrome">
+            <button type="button" class="btn btn--chrome" data-open-modal="release-modal">
               <span class="btn__icon" aria-hidden="true">✦</span>
               Add to Chrome
-            </a>
-            <a href="#" class="btn btn--firefox">
+            </button>
+            <button type="button" class="btn btn--edge" data-open-modal="release-modal">
+              <span class="btn__icon" aria-hidden="true">◆</span>
+              Add to Microsoft Edge
+            </button>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/foxui-custom-chrome-tab/" class="btn btn--firefox">
               <span class="btn__icon" aria-hidden="true">◈</span>
               Add to Firefox
             </a>
@@ -207,7 +211,7 @@
               <span class="donate-btn__arrow" aria-hidden="true">↗</span>
             </a>
             <a
-              href="https://ko-fi.com/riviyax"
+              href="https://ko-fi.com/riviya_x"
               target="_blank"
               rel="noopener noreferrer"
               class="donate-btn donate-btn--kofi"
@@ -241,5 +245,84 @@
     </footer>
 
   </div>
+
+  <!-- ===================== RELEASE STATUS MODAL ===================== -->
+  <div class="modal-overlay" id="release-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+      <button type="button" class="modal__close" data-close-modal aria-label="Close dialog">✕</button>
+
+      <span class="modal__eyebrow">Not on the store yet</span>
+      <h2 id="modal-title" class="modal__title">We haven't published to the Web Store</h2>
+      <p id="modal-desc" class="modal__text">
+        FoxUI isn't listed on the Chrome or Edge add-on stores yet — the one-time
+        $5 developer registration fee is still blocking that step. Until then, you
+        can watch a quick walkthrough below and grab the source to install it manually.
+      </p>
+
+      <div class="modal__video">
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/8auc1vRZd1Y?si=msr60VP6R238j_bO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class="modal__actions">
+        <a href="https://github.com/riviyax/foxui/releases/latest" target="_blank" rel="noopener noreferrer" class="btn btn--chrome modal__download">
+          <span class="btn__icon" aria-hidden="true">⇩</span>
+          Download Source Code
+        </a>
+        <button type="button" class="btn btn--ghost" data-close-modal>Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var openTriggers = document.querySelectorAll('[data-open-modal]');
+      var closeTriggers = document.querySelectorAll('[data-close-modal]');
+      var lastFocused = null;
+
+      function openModal(id) {
+        var modal = document.getElementById(id);
+        if (!modal) return;
+        lastFocused = document.activeElement;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        var closeBtn = modal.querySelector('.modal__close');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeModal(modal) {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      openTriggers.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openModal(btn.getAttribute('data-open-modal'));
+        });
+      });
+
+      closeTriggers.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var modal = btn.closest('.modal-overlay');
+          if (modal) closeModal(modal);
+        });
+      });
+
+      document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) closeModal(overlay);
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.is-open').forEach(closeModal);
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>

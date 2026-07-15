@@ -1,38 +1,53 @@
 {
   "manifest_version": 3,
-  "name": "ChromeUI — Custom Chrome Tab",
-  "version": "1.0",
-  "description": "Stylish dashboard new tab with background videos/images, clock, greeting, and easy customization. - Made with ♥ by Riviya_X",
-  "permissions": ["storage"],
-  
+  "name": "FoxUI — Custom Chrome Tab",
+  "version": "1.0.0",
+  "description": "Stylish dashboard new tab with background videos/images, clock, greeting, and easy customization. Made with ♥ by Riviya_X.",
+
+  "permissions": [
+    "storage"
+  ],
+
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
-  
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FoxUI"
+  },
+
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "ChromeUI"
-  },
+
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/music/*",
         "assets/images/*",
         "assets/videos/*",
+        "assets/music/*",
         "config/*"
       ],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
+
   "browser_specific_settings": {
     "gecko": {
-      "id": "chromeui-dashboard@riviyax.com",
-      "strict_min_version": "109.0"
+      "id": "foxui-dashboard@riviyax.com",
+      "strict_min_version": "109.0",
+
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ],
+        "optional": []
+      }
     }
   }
 }
