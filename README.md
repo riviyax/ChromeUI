@@ -21,7 +21,7 @@ Our brand new release is here, featuring full support for major browsers, refine
 
 FoxUI is expanding to your browser's official extension marketplaces! 
 
-* **Mozilla Firefox**: **Approved & Available 🎉** -> [Download from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/foxui-custom-chrome-tab/)
+* **Mozilla Firefox**: [Download from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/foxui-custom-chrome-tab/)
 * **Microsoft Edge**: [Download from Edge Add-ons ](https://microsoftedge.microsoft.com/addons/detail/fhllhpobplkinfabebgcmefpkbceiglg)
 * **Google Chrome**: Distributed manually via GitHub (unpacked).
 
