@@ -21,8 +21,8 @@ Our brand new release is here, featuring full support for major browsers, refine
 
 FoxUI is expanding to your browser's official extension marketplaces! 
 
-* **Mozilla Firefox**: **Approved & Available 🎉** -> [Download from Firefox Add-ons (AMO)](https://addons.mozilla.org/en-US/firefox/addon/foxui-custom-chrome-tab/)
-* **Microsoft Edge**: **In Review ⏳** (Submitted to Microsoft Partner Center, awaiting approval).
+* **Mozilla Firefox**: [Download from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/foxui-custom-chrome-tab/)
+* **Microsoft Edge**: [Download from Edge Add-ons ](https://microsoftedge.microsoft.com/addons/detail/fhllhpobplkinfabebgcmefpkbceiglg)
 * **Google Chrome**: Distributed manually via GitHub (unpacked).
 
 ---
@@ -59,12 +59,6 @@ Once downloaded, extract the archive to a folder on your system.
 2. Enable **Developer Mode** using the toggle switch in the top-right corner.
 3. Click on the **Load unpacked** button in the top-left corner.
 4. Select the extracted `FoxUI for Chrome-1.0.0` folder.
-
-#### 🌐 Microsoft Edge
-1. Open Microsoft Edge and navigate to `edge://extensions`.
-2. Toggle on **Developer mode** in the bottom-left pane.
-3. Click the **Load unpacked** button.
-4. Select the extracted `FoxUI for Edge-1.0.0` folder.
 
 ---
 
